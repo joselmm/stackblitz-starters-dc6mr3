@@ -3,7 +3,7 @@ import etiquetarNumero from '../../models/etiquetarNumero.function';
 import VideoCardInfo from '../../models/VideoCardInfo.class';
 import SuggestionsComponent from './SuggestionsComponent.jsx';
 
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
 
 const SearchVideoComponent = ({ setVideos }) => {
   /* suggestion list state */
