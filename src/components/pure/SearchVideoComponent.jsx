@@ -72,7 +72,7 @@ const SearchVideoComponent = ({ setVideos }) => {
 
   /* event listener of keydown */
   function handleKeyDown(e) {
-    console.log(e.target);
+    console.log(e.key);
   }
 
   return (
