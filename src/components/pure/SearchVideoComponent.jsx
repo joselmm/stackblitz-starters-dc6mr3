@@ -45,7 +45,7 @@ const SearchVideoComponent = ({ setVideos }) => {
   function suggestions() {
     const query = inputSearchRef.current.value;
 
-    if (query === '' ) return;
+    if (query === '') return;
     setQuery(query);
     const encodedQuery = encodeURIComponent(query);
     /* https://wlkkpr-3000.csb.app/suggestions/harry */
@@ -67,8 +67,8 @@ const SearchVideoComponent = ({ setVideos }) => {
   }
 
   return (
-    <div className="col-6" onClick={console.log('f')}>
-      <form onSubmit={(e) => searchVideos(e)} className="input-group mb-3 ">
+    <div className="col-6">
+      <form onSubmit={(e) => searchVideos(e)} className="input-group">
         <input
           onChange={suggestions}
           ref={inputSearchRef}

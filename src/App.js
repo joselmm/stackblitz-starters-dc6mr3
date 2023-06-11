@@ -49,7 +49,7 @@ export default function App() {
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
   return (
     <div className="row">
-      <header className="col-12 mt-3">
+      <header className="col-12 mt-3 mb-3">
         <div className="row">
           <div className="col-3"></div>
           <SearchVideoComponent setVideos={setVideos} />

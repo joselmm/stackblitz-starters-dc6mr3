@@ -19,7 +19,7 @@ const SuggestionsComponent = ({ suggestionList, query }) => {
   }
 
   return (
-    <div class="position-fixed">
+    <div class="position-absolute" style={{ zIndex: '5' }}>
       <ul className="list-group">{renderSuggestions()}</ul>
     </div>
   );
