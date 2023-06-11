@@ -45,7 +45,7 @@ const SearchVideoComponent = ({ setVideos }) => {
   function suggestions() {
     const query = inputSearchRef.current.value;
 
-    if (query === '' || query.slice(query.length - 1) === ' ') return;
+    if (query === '' ) return;
     setQuery(query);
     const encodedQuery = encodeURIComponent(query);
     /* https://wlkkpr-3000.csb.app/suggestions/harry */

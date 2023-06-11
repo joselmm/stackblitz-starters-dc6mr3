@@ -19,7 +19,7 @@ const SuggestionsComponent = ({ suggestionList, query }) => {
   }
 
   return (
-    <div>
+    <div class="position-fixed">
       <ul className="list-group">{renderSuggestions()}</ul>
     </div>
   );
