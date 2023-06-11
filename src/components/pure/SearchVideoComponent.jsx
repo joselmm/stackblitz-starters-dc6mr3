@@ -17,7 +17,6 @@ const SearchVideoComponent = ({ setVideos }) => {
     e.preventDefault();
     /* set suggestionList value as an empty array */
     setSuggestionList([]);
-    var query = inputSearchRef.current.value;
     var encodedQuery = encodeURIComponent(query);
     var searchResults = await fetch(
       `https://yt-info-1y11.onrender.com/buscarVideo/${encodedQuery}`
@@ -43,19 +42,18 @@ const SearchVideoComponent = ({ setVideos }) => {
 
   /* Function that retrieves and renders search suggestions.*/
 
-  function suggestions() {
-    const query = inputSearchRef.current.value;
-
-    if (query === '') {
+  async function suggestions() {
+    setQuery(inputSearchRef.current.value);
+    console.log(query);
+    if (inputSearchRef.current.value === '') {
       setSuggestionList([]);
       return;
     }
-    setQuery(query);
-    const encodedQuery = encodeURIComponent(query);
+    const encodedQuery = encodeURIComponent(inputSearchRef.current.value);
     /* https://wlkkpr-3000.csb.app/suggestions/harry */
     /* const uri = `https://script.google.com/macros/s/AKfycbyn-92JTOxCjFR-U3zFUB4GOhoUp06zomignavKvCx_oP2T_I2sii-7kf57X6xs9krO/exec?query=${encodedQuery}`; */
     const uri = `https://wlkkpr-3000.csb.app/suggestions/${encodedQuery}`;
-    fetch(uri)
+    await fetch(uri)
       .then((res) => res.text())
       .then((text) => {
         const regex = /\(.+\)/;
@@ -65,49 +63,35 @@ const SearchVideoComponent = ({ setVideos }) => {
         var items = JSON.parse(json)[1];
 
         var sugerencias = items.map((s) => s[0]);
-        console.log(sugerencias);
-        setSuggestionList(sugerencias);
+        /* console.log(sugerencias); */
+        if (inputSearchRef.current.value != '') {
+          setSuggestionList(sugerencias);
+        }
       });
   }
   /* watch changes of suggestionList state */
   useEffect(() => {
-    if (suggestionList.length === 0) setSuggestionSelectedIdx(0);
+    console.log(`cambio estado de suggestionList`);
+    setSuggestionSelectedIdx(-1);
   }, [suggestionList]);
   /* watch changes of suggestionSelectedIdx state */
   useEffect(() => {
-    console.log(suggestionSelectedIdx);
+    console.log(
+      `cambio de estado de suggestionSelectedIdx: ${suggestionSelectedIdx}`
+    );
   }, [suggestionSelectedIdx]);
 
   /* event listener of keydown */
   function handleKeyDown(e) {
-    console.log(e.key);
-  
-    function moveUp() {
-      if (suggestionSelectedIdx > 0) {
-        return suggestionSelectedIdx - 1;
-      } else {
-        return setSuggestionList.length - 1;
-      }
-    }
-  
-    function moveDown() {
-      if (suggestionSelectedIdx < setSuggestionList.length - 1) {
-        return suggestionSelectedIdx + 1;
-      } else {
-        return 0;
-      }
-    }
-  
+    if (suggestionList.length === 0) return;
     if (e.key === 'ArrowDown') {
-      console.log('down if');
-      var newIdx = moveDown();
-      console.log(newIdx);
-      setSuggestionSelectedIdx(newIdx);
+      setSuggestionSelectedIdx((prevIdx) =>
+        prevIdx < suggestionList.length - 1 ? prevIdx + 1 : 0
+      );
     } else if (e.key === 'ArrowUp') {
-      console.log('up if');
-      var newIdx = moveUp();
-      console.log(newIdx);
-      setSuggestionSelectedIdx(newIdx);
+      setSuggestionSelectedIdx((prevIdx) =>
+        prevIdx > 0 ? prevIdx - 1 : suggestionList.length - 1
+      );
     }
   }
 

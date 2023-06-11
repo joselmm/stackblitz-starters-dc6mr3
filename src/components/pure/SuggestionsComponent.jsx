@@ -10,7 +10,7 @@ const SuggestionsComponent = ({
     suggestionList.forEach((s, idx) => {
       var cut = s.slice(query.length);
       var content =
-        idx === suggestionSelectedIdx && suggestionSelectedIdx != 0 ? (
+        idx === suggestionSelectedIdx ? (
           <span className="bg-dark">
             {query}
             {cut}
