@@ -74,9 +74,8 @@ const SearchVideoComponent = ({ setVideos }) => {
       .then((res) => res.text())
       .then((text) => {
         const regex = /\(.+\)/;
-        const json = text
-          .match(regex)[0]
-          .slice(1, text.match(regex)[0].length - 1);
+        const sugs = text.match(regex)[0];
+        const json = sugs.slice(1, sugs.length - 1);
         var items = JSON.parse(json)[1];
 
         var sugerencias = items.map((s) => s[0]);
@@ -96,6 +95,25 @@ const SearchVideoComponent = ({ setVideos }) => {
     console.log(
       `cambio de estado de suggestionSelectedIdx: ${suggestionSelectedIdx}`
     );
+    if (suggestionSelectedIdx >= 0) {
+      console.log(suggestionSelectedIdx);
+      inputSearchRef.current.value =
+        suggestionList[suggestionSelectedIdx] || '';
+
+      setTimeout(() => {
+        inputSearchRef.current.focus();
+        inputSearchRef.current.selectionStart =
+          suggestionList[suggestionSelectedIdx]?.length ||
+          inputSearchRef.current.value.length;
+        inputSearchRef.current.selectionEnd =
+          suggestionList[suggestionSelectedIdx]?.length ||
+          inputSearchRef.current.value.length;
+      }, 0);
+      console.log(
+        inputSearchRef.current.selectionStart,
+        inputSearchRef.current.selectionEnd
+      );
+    }
   }, [suggestionSelectedIdx]);
 
   /* event listener of keydown */

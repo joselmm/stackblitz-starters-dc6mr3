@@ -11,18 +11,20 @@ const SuggestionsComponent = ({
       var cut = s.slice(query.length);
       var content =
         idx === suggestionSelectedIdx ? (
-          <span className="bg-dark">
-            {query}
-            {cut}
-          </span>
+          <div className="bg-dark text-light">
+            <span>
+              {query}
+              {cut}
+            </span>
+          </div>
         ) : (
-          <span>
+          <span >
             <b>{query}</b>
             {cut}
           </span>
         );
       elementArray.push(
-        <li key={idx} className="list-group-item p-0 pl-1">
+        <li style={{cursor: "alias"}} key={idx} className="list-group-item p-0 pl-1">
           {content}
         </li>
       );
