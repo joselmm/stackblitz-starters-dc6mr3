@@ -12,11 +12,21 @@ const SearchVideoComponent = ({ setVideos }) => {
   const [query, setQuery] = useState('');
   let [suggestionSelectedIdx, setSuggestionSelectedIdx] = useState(0);
   const inputSearchRef = useRef();
+  const btnSearchRef = useRef();
+
   /* functiion to search videos */
   async function searchVideos(e) {
+    console.log('ejecutando busqueda');
     e.preventDefault();
+    /* if the input is empty then nothing is going to execute */
+    if (inputSearchRef.current.value === '') return;
+
     /* set suggestionList value as an empty array */
     setSuggestionList([]);
+    /* disable button */
+    btnSearchRef.current.disabled = true;
+    /* inputSearchRef.current.value */
+
     var encodedQuery = encodeURIComponent(query);
     var searchResults = await fetch(
       `https://yt-info-1y11.onrender.com/buscarVideo/${encodedQuery}`
@@ -38,13 +48,20 @@ const SearchVideoComponent = ({ setVideos }) => {
     }
     /* console.log(tempArray.slice(0, 5)); */
     setVideos(tempArray);
+    /* disable button */
+    btnSearchRef.current.disabled = false;
   }
 
   /* Function that retrieves and renders search suggestions.*/
 
   async function suggestions() {
+    /**
+     * No, la función setQuery no es asíncrona. Es una función síncrona que actualiza el estado de forma inmediata. Sin embargo, ten en cuenta que en React, la actualización del estado es un proceso asincrónico. Cuando llamas a una función para actualizar el estado, React no actualiza el estado inmediatamente, sino que encola la actualización y la realiza de forma asincrónica en un momento posterior.
+     *
+     * POR ESTO USO inputSearchRef.current.value en lugar de query
+     */
     setQuery(inputSearchRef.current.value);
-    console.log(query);
+    //console.log(query);
     if (inputSearchRef.current.value === '') {
       setSuggestionList([]);
       return;
@@ -108,6 +125,7 @@ const SearchVideoComponent = ({ setVideos }) => {
         />
         <div className="input-group-append">
           <button
+            ref={btnSearchRef}
             type="submit"
             className="input-group-text bg-success text-light cursor-pointer"
             id="basic-addon2"
