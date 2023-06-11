@@ -154,6 +154,9 @@ const SearchVideoComponent = ({ setVideos }) => {
       </form>
 
       <SuggestionsComponent
+        inputSearchRef={inputSearchRef}
+        btnSearchRef={btnSearchRef}
+        setSuggestionSelectedIdx={setSuggestionSelectedIdx}
         suggestionSelectedIdx={suggestionSelectedIdx}
         query={query}
         suggestionList={suggestionList}

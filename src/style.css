@@ -12,3 +12,7 @@ p {
 .cursor-pointer {
   cursor: pointer;
 }
+
+button:disabled {
+  opacity: 0.5;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 const SuggestionsComponent = ({
+  btnSearchRef,
   suggestionSelectedIdx,
+  inputSearchRef,
   suggestionList,
   query,
 }) => {
@@ -18,13 +20,22 @@ const SuggestionsComponent = ({
             </span>
           </div>
         ) : (
-          <span >
+          <span>
             <b>{query}</b>
             {cut}
           </span>
         );
       elementArray.push(
-        <li style={{cursor: "alias"}} key={idx} className="list-group-item p-0 pl-1">
+        <li
+          style={{ cursor: 'default' }}
+          key={idx}
+          className="list-group-item p-0 pl-1"
+          onClick={() => {
+            /* setSuggestionSelectedIdx(idx); */
+            inputSearchRef.current.value = s;
+            btnSearchRef.current.click();
+          }}
+        >
           {content}
         </li>
       );
