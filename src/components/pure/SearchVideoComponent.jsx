@@ -69,29 +69,45 @@ const SearchVideoComponent = ({ setVideos }) => {
         setSuggestionList(sugerencias);
       });
   }
-
+  /* watch changes of suggestionList state */
   useEffect(() => {
     if (suggestionList.length === 0) setSuggestionSelectedIdx(0);
   }, [suggestionList]);
+  /* watch changes of suggestionSelectedIdx state */
+  useEffect(() => {
+    console.log(suggestionSelectedIdx);
+  }, [suggestionSelectedIdx]);
 
   /* event listener of keydown */
   function handleKeyDown(e) {
-    //console.log(e.key);
-
+    console.log(e.key);
+  
     function moveUp() {
-      if (elementSelectedIndex > 0) {
-        elementSelectedIndex--;
+      if (suggestionSelectedIdx > 0) {
+        return suggestionSelectedIdx - 1;
       } else {
-        elementSelectedIndex = array.length - 1;
+        return setSuggestionList.length - 1;
       }
     }
-
+  
     function moveDown() {
-      if (elementSelectedIndex < array.length - 1) {
-        elementSelectedIndex++;
+      if (suggestionSelectedIdx < setSuggestionList.length - 1) {
+        return suggestionSelectedIdx + 1;
       } else {
-        elementSelectedIndex = 0;
+        return 0;
       }
+    }
+  
+    if (e.key === 'ArrowDown') {
+      console.log('down if');
+      var newIdx = moveDown();
+      console.log(newIdx);
+      setSuggestionSelectedIdx(newIdx);
+    } else if (e.key === 'ArrowUp') {
+      console.log('up if');
+      var newIdx = moveUp();
+      console.log(newIdx);
+      setSuggestionSelectedIdx(newIdx);
     }
   }
 
@@ -117,7 +133,11 @@ const SearchVideoComponent = ({ setVideos }) => {
         </div>
       </form>
 
-      <SuggestionsComponent query={query} suggestionList={suggestionList} />
+      <SuggestionsComponent
+        suggestionSelectedIdx={suggestionSelectedIdx}
+        query={query}
+        suggestionList={suggestionList}
+      />
     </div>
   );
 };
