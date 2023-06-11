@@ -15,7 +15,8 @@ const SearchVideoComponent = ({ setVideos }) => {
   /* functiion to search videos */
   async function searchVideos(e) {
     e.preventDefault();
-    console.log('ff');
+    /* set suggestionList value as an empty array */
+    setSuggestionList([]);
     var query = inputSearchRef.current.value;
     var encodedQuery = encodeURIComponent(query);
     var searchResults = await fetch(
@@ -45,7 +46,10 @@ const SearchVideoComponent = ({ setVideos }) => {
   function suggestions() {
     const query = inputSearchRef.current.value;
 
-    if (query === '') return;
+    if (query === '') {
+      setSuggestionList([]);
+      return;
+    }
     setQuery(query);
     const encodedQuery = encodeURIComponent(query);
     /* https://wlkkpr-3000.csb.app/suggestions/harry */
@@ -66,11 +70,17 @@ const SearchVideoComponent = ({ setVideos }) => {
       });
   }
 
+  /* event listener of keydown */
+  function handleKeyDown(e) {
+    console.log(e.target);
+  }
+
   return (
     <div className="col-6">
       <form onSubmit={(e) => searchVideos(e)} className="input-group">
         <input
           onChange={suggestions}
+          onKeyDown={handleKeyDown}
           ref={inputSearchRef}
           type="search"
           className="form-control"
