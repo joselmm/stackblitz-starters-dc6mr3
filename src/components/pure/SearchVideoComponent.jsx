@@ -10,7 +10,7 @@ const SearchVideoComponent = ({ setVideos }) => {
 
   const [suggestionList, setSuggestionList] = useState([]);
   const [query, setQuery] = useState('');
-
+  let [suggestionSelectedIdx, setSuggestionSelectedIdx] = useState(0);
   const inputSearchRef = useRef();
   /* functiion to search videos */
   async function searchVideos(e) {
@@ -70,9 +70,29 @@ const SearchVideoComponent = ({ setVideos }) => {
       });
   }
 
+  useEffect(() => {
+    if (suggestionList.length === 0) setSuggestionSelectedIdx(0);
+  }, [suggestionList]);
+
   /* event listener of keydown */
   function handleKeyDown(e) {
-    console.log(e.key);
+    //console.log(e.key);
+
+    function moveUp() {
+      if (elementSelectedIndex > 0) {
+        elementSelectedIndex--;
+      } else {
+        elementSelectedIndex = array.length - 1;
+      }
+    }
+
+    function moveDown() {
+      if (elementSelectedIndex < array.length - 1) {
+        elementSelectedIndex++;
+      } else {
+        elementSelectedIndex = 0;
+      }
+    }
   }
 
   return (
