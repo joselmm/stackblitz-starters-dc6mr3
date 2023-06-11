@@ -49,7 +49,8 @@ const SearchVideoComponent = ({ setVideos }) => {
     setQuery(query);
     const encodedQuery = encodeURIComponent(query);
     /* https://wlkkpr-3000.csb.app/suggestions/harry */
-    const uri = `https://script.google.com/macros/s/AKfycbyn-92JTOxCjFR-U3zFUB4GOhoUp06zomignavKvCx_oP2T_I2sii-7kf57X6xs9krO/exec?query=${encodedQuery}`;
+    /* const uri = `https://script.google.com/macros/s/AKfycbyn-92JTOxCjFR-U3zFUB4GOhoUp06zomignavKvCx_oP2T_I2sii-7kf57X6xs9krO/exec?query=${encodedQuery}`; */
+    const uri = `https://wlkkpr-3000.csb.app/suggestions/${encodedQuery}`;
     fetch(uri)
       .then((res) => res.text())
       .then((text) => {
