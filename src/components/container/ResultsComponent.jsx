@@ -6,18 +6,12 @@ import VideoCardComponent from '../pure/VideoCardComponent.jsx';
 const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
-    
-    switch (videoInfo.addedToPlaylist) {
-      case true:
-        {
-          removeFromPlaylist(videoInfo.videoId);
-        }
-        break;
-      case true:
-        {
-          addToPlaylist(videoInfo);
-        }
-        break;
+    if (videoInfo.addedToPlaylist === true) {
+      console.log(videoInfo.addedToPlaylist);
+      removeFromPlaylist(videoInfo.videoId);
+    } else if(videoInfo.addedToPlaylist === false){
+      console.log(videoInfo.addedToPlaylist);
+      addToPlaylist(videoInfo);
     }
 
     //console.log(videos);
@@ -25,12 +19,12 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
     const index = tempVideolist.indexOf(videoInfo);
     tempVideolist[index].addedToPlayList =
       !tempVideolist[index].addedToPlayList;
-   // console.log(tempVideolist[index]);
+    // console.log(tempVideolist[index]);
     setVideos(tempVideolist);
   }
 
   function removeFromPlaylist(videoId) {
-    console.log("remove");
+    console.log('remove');
     const tempPlaylist = [...playlist];
     const index = null;
     var iteracion = 0;
@@ -48,7 +42,7 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
 
   function addToPlaylist(info) {
     //console.log(videos);
-    console.log("add");
+    console.log('add');
 
     const tempPlaylist = [...playlist];
     const playlistItem = new PlayListItem({
@@ -59,7 +53,7 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
       state: PLAYLIST_ITEM_STATE.WAITING,
     });
     tempPlaylist.push(playlistItem);
-    setPlaylist(tempPlaylist)
+    setPlaylist(tempPlaylist);
   }
 
   return (
