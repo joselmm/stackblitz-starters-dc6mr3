@@ -39,7 +39,7 @@ const playlistI2 = new PlaylistItem({
   title: 'Hey Mor - Ozuna Ft Feid (Official Video)',
   directLink: '',
   poster: '',
-  videoId: 'NO7EtdR3Dyw',
+  videoId: 'sx3vYXOlgK4',
 });
 
 export default function App() {

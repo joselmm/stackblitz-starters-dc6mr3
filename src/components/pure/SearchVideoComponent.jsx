@@ -41,7 +41,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
 
       for (let playlistItem of playlist) {
         if (playlistItem.videoId === videoItem.id) {
-          console.log(videoItem.id);
+          console.log(playlistItem);
           addedToPlayList = true;
           break;
         }
@@ -49,7 +49,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
       const videoCardInfo = new VideoCardInfo({
         title: videoItem.title,
         poster: `https://i.ytimg.com/vi/${videoItem.id}/0.jpg`,
-        addedToPlayList:addedToPlayList ,
+        addedToPlayList,
         videoId: videoItem.id,
         duration: videoItem.duration,
         views: etiquetarNumero(videoItem.views),

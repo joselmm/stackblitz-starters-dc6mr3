@@ -9,6 +9,6 @@ export default class PlayListItem {
     this.title = title;
     this.directLink = directLink;
     this.poster = poster;
-    this.videoUrl = videoId;
+    this.videoId = videoId;
   }
 }
