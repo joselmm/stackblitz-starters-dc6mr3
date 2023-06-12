@@ -37,7 +37,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
     for (let videoItem of searchResults.items) {
       if (videoItem.type != 'video') continue;
 
-      const addedToPlayList = false;
+      let addedToPlayList = false;
 
       for (let playlistItem of playlist) {
         if (playlistItem.videoId === videoItem.id) {
@@ -54,7 +54,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
         duration: videoItem.duration,
         views: etiquetarNumero(videoItem.views),
       });
-      console.log(videoCardInfo);
+      //console.log(videoCardInfo);
       tempArray.push(videoCardInfo);
     }
     /* console.log(tempArray.slice(0, 5)); */
