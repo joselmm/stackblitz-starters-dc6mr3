@@ -41,19 +41,20 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
 
       for (let playlistItem of playlist) {
         if (playlistItem.videoId === videoItem.id) {
-         // console.log(playlistItem);
+          // console.log(playlistItem);
           addedToPlayList = true;
-          break;
+          //break;
         }
       }
-      const videoCardInfo = new VideoCardInfo({
+      const videoCardInfo =  new VideoCardInfo({
         title: videoItem.title,
         poster: `https://i.ytimg.com/vi/${videoItem.id}/0.jpg`,
-        addedToPlayList,
+        addedToPlayList: addedToPlayList,
         videoId: videoItem.id,
         duration: videoItem.duration,
         views: etiquetarNumero(videoItem.views),
       });
+      console.log(videoCardInfo);
       tempArray.push(videoCardInfo);
     }
     /* console.log(tempArray.slice(0, 5)); */

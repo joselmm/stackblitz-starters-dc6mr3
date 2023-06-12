@@ -6,8 +6,7 @@ const VideoCardComponent = ({ info, toggleAddToPlaylist }) => {
   function addPlaylistElement() {
     return info.addedToPlayList ? (
       <span>
-        {' '}
-        Agregado{' '}
+        Agregado
         <i className="bi bi-check-circle-fill" style={{ color: 'green' }}></i>
       </span>
     ) : (
