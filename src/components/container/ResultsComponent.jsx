@@ -6,11 +6,12 @@ import VideoCardComponent from '../pure/VideoCardComponent.jsx';
 const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
-    if (videoInfo.addedToPlaylist === true) {
-      console.log(videoInfo.addedToPlaylist);
+    console.log(videoInfo);
+    if (videoInfo.addedToPlayList === true) {
+      console.log(videoInfo.addedToPlayList);
       removeFromPlaylist(videoInfo.videoId);
-    } else if(videoInfo.addedToPlaylist === false){
-      console.log(videoInfo.addedToPlaylist);
+    } else if (videoInfo.addedToPlayList === false) {
+      console.log(videoInfo.addedToPlayList);
       addToPlaylist(videoInfo);
     }
 
@@ -26,7 +27,7 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
   function removeFromPlaylist(videoId) {
     console.log('remove');
     const tempPlaylist = [...playlist];
-    const index = null;
+    let index = null;
     var iteracion = 0;
     for (let playlistItem of playlist) {
       if (playlistItem.videoId === videoId) {
