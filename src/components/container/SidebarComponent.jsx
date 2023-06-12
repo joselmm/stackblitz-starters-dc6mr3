@@ -4,6 +4,7 @@ import PlaylistItemComponent from '../pure/PlaylistItemComponent';
 const SideBarContext = React.createContext();
 
 const PlaylistComponent = () => {
+  
   const state = useContext(SideBarContext);
 
   return (

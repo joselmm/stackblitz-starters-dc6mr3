@@ -52,7 +52,7 @@ export default function App() {
       <header className="col-12 mt-3 mb-3">
         <div className="row">
           <div className="col-3"></div>
-          <SearchVideoComponent setVideos={setVideos} />
+          <SearchVideoComponent playlist={playlist} setVideos={setVideos} />
           <div className="col-3"></div>
         </div>
       </header>
