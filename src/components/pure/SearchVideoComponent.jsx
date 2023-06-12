@@ -41,7 +41,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
 
       for (let playlistItem of playlist) {
         if (playlistItem.videoId === videoItem.id) {
-          console.log(playlistItem);
+         // console.log(playlistItem);
           addedToPlayList = true;
           break;
         }
