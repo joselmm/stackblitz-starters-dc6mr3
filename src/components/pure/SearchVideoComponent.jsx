@@ -5,7 +5,7 @@ import SuggestionsComponent from './SuggestionsComponent.jsx';
 
 //import fetch from 'node-fetch';
 
-const SearchVideoComponent = ({ setVideos }) => {
+const SearchVideoComponent = ({ setVideos, playlist }) => {
   /* suggestion list state */
 
   const [suggestionList, setSuggestionList] = useState([]);
@@ -36,10 +36,20 @@ const SearchVideoComponent = ({ setVideos }) => {
     const tempArray = [];
     for (let videoItem of searchResults.items) {
       if (videoItem.type != 'video') continue;
+
+      let addedToPlayList = false;
+
+      // Verificar si existe un objeto en la lista de la playlist con la propiedad `videoId` igual a `videoItem.id`.
+      for (let playlistItem of playlist) {
+        if (playlistItem.videoId === videoItem.id) {
+          addedToPlayList = true;
+          break;
+        }
+      }
       const videoCardInfo = new VideoCardInfo({
         title: videoItem.title,
         poster: `https://i.ytimg.com/vi/${videoItem.id}/0.jpg`,
-        addedToPlayList: false,
+        addedToPlayList,
         videoId: videoItem.id,
         duration: videoItem.duration,
         views: etiquetarNumero(videoItem.views),

@@ -56,7 +56,12 @@ export default function App() {
           <div className="col-3"></div>
         </div>
       </header>
-      <ResultsComponent setVideos={setVideos} videos={videos} />
+      <ResultsComponent
+        playlist={playlist}
+        setPlaylist={setPlaylist}
+        setVideos={setVideos}
+        videos={videos}
+      />
       <SidebarComponent playlist={playlist} setPlaylist={setPlaylist} />
     </div>
   );

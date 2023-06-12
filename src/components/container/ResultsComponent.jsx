@@ -4,7 +4,7 @@ import { Context } from '../../App.js';
 const ResultComponent = ({ videos, setVideos }) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
-    console.log(videos);
+    //console.log(videos);
     const tempVideolist = [...videos];
     const index = tempVideolist.indexOf(videoInfo);
     tempVideolist[index].addedToPlayList =
