@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import PlayerComponent from '../pure/PlayerComponent';
 import PlaylistItemComponent from '../pure/PlaylistItemComponent';
 
 const SideBarContext = React.createContext();
 
 const PlaylistComponent = () => {
-  
   const state = useContext(SideBarContext);
 
   return (
@@ -17,9 +17,11 @@ const PlaylistComponent = () => {
 };
 
 const SidebarComponent = (props) => {
+  
   return (
     <SideBarContext.Provider value={props}>
       <div className="col-3 bg-primary">
+        <PlayerComponent playerSrc={props.playerSrc} />
         <PlaylistComponent />
       </div>
     </SideBarContext.Provider>

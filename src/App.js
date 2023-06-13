@@ -47,6 +47,9 @@ export default function App() {
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
+  const [playerSrc, setPlayerSrc] = useState('');
+  //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
+
   return (
     <div className="row">
       <header className="col-12 mt-3 mb-3">
@@ -62,7 +65,12 @@ export default function App() {
         setVideos={setVideos}
         videos={videos}
       />
-      <SidebarComponent playlist={playlist} setPlaylist={setPlaylist} />
+      <SidebarComponent
+        setPlayerSrc={setPlayerSrc}
+        playerSrc={playerSrc}
+        playlist={playlist}
+        setPlaylist={setPlaylist}
+      />
     </div>
   );
 }
