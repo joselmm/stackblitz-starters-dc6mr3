@@ -57,14 +57,15 @@ export default function App() {
   useEffect(() => {
     if (prevLengthRef.current < playlist.length) {
     }
-  }, [playlist]);
+  }, [playlist]); 
 
   function addToQueue() {
     const tempPlaylist = [...playlist];
     let idx = 0;
     for (let item of waitingItems) {
       if (item.state === PLAYLIST_ITEM_STATE.WAITING) {
-        if(!queue.includes(item.videoId))setQueue((prev)=>[...prev, item.videoId]);
+        if (!queue.includes(item.videoId))
+          setQueue((prev) => [...prev, item.videoId]);
         tempPlaylist[idx].state = PLAYLIST_ITEM_STATE.PROCESSING;
       }
       idx++;
