@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.css';
 import ResultsComponent from './components/container/ResultsComponent.jsx';
+import PlayerComponent from './components/pure/PlayerComponent.jsx';
 import SidebarComponent from './components/container/SidebarComponent.jsx';
 import SearchVideoComponent from './components/pure/SearchVideoComponent.jsx';
 import VideoCardInfo from './models/VideoCardInfo.class.js';
@@ -65,12 +66,13 @@ export default function App() {
         setVideos={setVideos}
         videos={videos}
       />
-      <SidebarComponent
+      {/* <SidebarComponent
         setPlayerSrc={setPlayerSrc}
         playerSrc={playerSrc}
         playlist={playlist}
         setPlaylist={setPlaylist}
-      />
+      /> */}
+      <PlayerComponent />
     </div>
   );
 }
