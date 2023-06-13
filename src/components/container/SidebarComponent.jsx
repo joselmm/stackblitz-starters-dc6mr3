@@ -17,11 +17,13 @@ const PlaylistComponent = () => {
 };
 
 const SidebarComponent = (props) => {
-  
   return (
     <SideBarContext.Provider value={props}>
       <div className="col-3 bg-primary">
-        <PlayerComponent playerSrc={props.playerSrc} />
+        <PlayerComponent
+          currentPlayingId={props.currentPlayingId}
+          playlist={props.playlist}
+        />
         <PlaylistComponent />
       </div>
     </SideBarContext.Provider>

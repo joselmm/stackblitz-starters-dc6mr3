@@ -46,7 +46,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
           //break;
         }
       }
-      const videoCardInfo =  new VideoCardInfo({
+      const videoCardInfo = new VideoCardInfo({
         title: videoItem.title,
         poster: `https://i.ytimg.com/vi/${videoItem.id}/0.jpg`,
         addedToPlayList: addedToPlayList,
@@ -145,7 +145,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
     <div className="col-6">
       <form onSubmit={(e) => searchVideos(e)} className="input-group">
         <input
-          /* disabled */
+          disabled
           onChange={suggestions}
           onKeyDown={handleKeyDown}
           ref={inputSearchRef}

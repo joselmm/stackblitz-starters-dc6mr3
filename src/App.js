@@ -32,7 +32,8 @@ const videoInfo2 = new VideoCardInfo({
 
 const playlistI1 = new PlaylistItem({
   title: 'Tainy, Bad Bunny, Julieta Venegas - Lo Siento BB:/ (Official Video)',
-  directLink: '',
+  directLink:
+    'https://drive.google.com/uc?id=1qewde2jNra6CYgD8us-7y_N166bRN1pE',
   poster: '',
   videoId: 'NO7EtdR3Dyw',
 });
@@ -48,7 +49,7 @@ export default function App() {
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
-  const [playerSrc, setPlayerSrc] = useState('');
+  const [currentPlayingId, setCurrentPlayingId] = useState('NO7EtdR3Dyw');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
 
   return (
@@ -61,14 +62,16 @@ export default function App() {
         </div>
       </header>
       <ResultsComponent
+        setCurrentPlayingId={setCurrentPlayingId}
+        currentPlayingId={currentPlayingId}
         playlist={playlist}
         setPlaylist={setPlaylist}
         setVideos={setVideos}
         videos={videos}
       />
       <SidebarComponent
-        setPlayerSrc={setPlayerSrc}
-        playerSrc={playerSrc}
+        setCurrentPlayingId={setCurrentPlayingId}
+        currentPlayingId={currentPlayingId}
         playlist={playlist}
         setPlaylist={setPlaylist}
       />
