@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 /* Bootstrap style sheet */
 import 'bootstrap/dist/css/bootstrap.css';
 /* Bootstrap icons style sheet */
@@ -48,9 +48,28 @@ export default function App() {
   /* videos state */
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
+  const [queue, setQueue] = useState([]);
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
   const [currentPlayingId, setCurrentPlayingId] = useState('NO7EtdR3Dyw');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
+  const prevLengthRef = useRef(playlist.length);
+  //console.log(prevLengthRef);
+  useEffect(() => {
+    if (prevLengthRef.current < playlist.length) {
+    }
+  }, [playlist]);
+
+  function addToQueue() {
+    const tempPlaylist = [...playlist];
+    let idx = 0;
+    for (let item of waitingItems) {
+      if (item.state === PLAYLIST_ITEM_STATE.WAITING) {
+        if(!queue.includes(item.videoId))setQueue((prev)=>[...prev, item.videoId]);
+        tempPlaylist[idx].state = PLAYLIST_ITEM_STATE.PROCESSING;
+      }
+      idx++;
+    }
+  }
 
   return (
     <div className="row">

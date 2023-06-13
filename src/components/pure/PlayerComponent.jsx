@@ -25,7 +25,7 @@ const tracks = [
 // para rescatar: https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=NO7EtdR3Dyw
 const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
   //const htmlplayerRef = useRef();
-  console.log(playlist);
+  //console.log(playlist);
   const currentPlayingItem = playlist.find(
     (item) => item.videoId === currentPlayingId
   );
