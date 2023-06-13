@@ -23,7 +23,7 @@ const tracks = [
 ];
 
 // para rescatar: https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=FU-7mHUTJKk
-const PlayerComponent = ({ playerSrc, current }) => {
+const PlayerComponent = ({ playerSrc, current, next, previous}) => {
   //const htmlplayerRef = useRef();
 
   return (
@@ -31,7 +31,7 @@ const PlayerComponent = ({ playerSrc, current }) => {
       <AudioPlayer
         showSkipControls={true}
         showJumpControls={false}
-        src="https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg"
+        src={playerSrc}
         onPlay={(e) => console.log('onPlay')}
         // other props here
       />
