@@ -66,13 +66,12 @@ export default function App() {
         setVideos={setVideos}
         videos={videos}
       />
-      {/* <SidebarComponent
+      <SidebarComponent
         setPlayerSrc={setPlayerSrc}
         playerSrc={playerSrc}
         playlist={playlist}
         setPlaylist={setPlaylist}
-      /> */}
-      <PlayerComponent />
+      />
     </div>
   );
 }
