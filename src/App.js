@@ -91,7 +91,6 @@ export default function App() {
 
     if (result.noError) {
       //test if the item does stil exist
-
       tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
       tempPlaylist[index].directLink = result.directLink;
     } else {
