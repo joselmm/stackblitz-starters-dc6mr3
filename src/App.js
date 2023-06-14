@@ -55,7 +55,9 @@ export default function App() {
   ]);
   /* playlist state */
 
-  const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
+  const [playlist, setPlaylist] = useState([
+    /* playlistI1, playlistI2 */
+  ]);
   const [currentPlayingId, setCurrentPlayingId] = useState('');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
   const prevLengthRef = useRef(playlist.length);
