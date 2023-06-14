@@ -48,11 +48,11 @@ const playlistI2 = new PlaylistItem({
 export default function App() {
   /*  */
   const [shouldProcessQueue, setShouldProcessQueue] = useState(true);
-
+  const [queue, setQueue] = useState([]);
   /* videos state */
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
-  let queue = [];
+
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
   const [currentPlayingId, setCurrentPlayingId] = useState('NO7EtdR3Dyw');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
@@ -72,7 +72,7 @@ export default function App() {
   }, []);
 
   function addToQueue() {
-    console.log("añadiendo a cola");
+    console.log('añadiendo a cola');
     const tempPlaylist = [...playlist];
     let idx = 0;
     for (let item of tempPlaylist) {
@@ -96,7 +96,7 @@ export default function App() {
     const tempPlaylist = [...playlist];
     var videoId = queue[0];
     const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
-    if (index === -1) queue.shift();
+    if (index === -1) setQueue((prev) => prev.slice(1));
     const result = await fetch(
       `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
     );
@@ -109,7 +109,7 @@ export default function App() {
     } else {
       tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
     }
-    queue.shift();
+    setQueue((prev) => prev.slice(1));
     setPlaylist(tempPlaylist);
     await sleep(1000);
     return procesarCola();
