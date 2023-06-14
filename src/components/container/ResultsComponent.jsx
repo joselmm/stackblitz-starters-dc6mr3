@@ -3,7 +3,7 @@ import PlayListItem from '../../models/PlaylistItem.class.js';
 import PLAYLIST_ITEM_STATE from '../../models/PlaylistItemState.enum.js';
 import VideoCardComponent from '../pure/VideoCardComponent.jsx';
 
-const ResultComponent = ({
+const ResultsComponent = ({
   videos,
   setVideos,
   setPlaylist,
@@ -36,7 +36,7 @@ const ResultComponent = ({
     /* remove from queue */
     removeFromQueue(videoId);
     //console.log('remove');
-   // console.log(queue);
+    // console.log(queue);
 
     const tempPlaylist = [...playlist];
     let index = null;
@@ -87,4 +87,4 @@ const ResultComponent = ({
   );
 };
 
-export default ResultComponent;
+export default ResultsComponent;

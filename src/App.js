@@ -75,53 +75,51 @@ export default function App() {
   }
 
   useEffect(() => {
-    async function procesarCola() {
-      console.log('ejecutando procesamiento en cola');
-      console.log(queue);
-      console.log(shouldProcessQueue);
-      if (!shouldProcessQueue) return;
-      console.log('hey');
-      console.log('logitud cola ' + queue.length);
-      if (queue.length === 0) {
-        console.log('cola vacia');
-        //   setShouldProcessQueue(false);
-        await sleep(1000);
-
-        return procesarCola();
-      } else {
-        const tempPlaylist = [...playlist];
-        var videoId = queue[0];
-        const index = tempPlaylist.findIndex(
-          (item) => item.videoId === videoId
-        );
-        console.log(index);
-        if (index === -1) setQueue((prev) => prev.slice(1));
-        const result = await fetch(
-          `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
-        );
-
-        if (result.noError) {
-          //test if the item does stil exist
-          tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
-          tempPlaylist[index].directLink = result.directLink;
-        } else {
-          tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
-        }
-        setQueue((prev) => prev.slice(1));
-        setPlaylist(tempPlaylist);
-        await sleep(3000);
-        return procesarCola();
-      }
-    }
-
-    if (shouldProcessQueue) {
-      procesarCola();
-    }
-
     return () => {
       setShouldProcessQueue(false);
     };
   }, [shouldProcessQueue]);
+
+  async function procesarCola() {
+    console.log('ejecutando procesamiento en cola');
+    console.log(queue);
+    console.log(shouldProcessQueue);
+    if (!shouldProcessQueue) return;
+    console.log('hey');
+    console.log('logitud cola ' + queue.length);
+    if (queue.length === 0) {
+      console.log('cola vacia');
+      //   setShouldProcessQueue(false);
+      await sleep(1000);
+
+      return procesarCola();
+    } else {
+      const tempPlaylist = [...playlist];
+      var videoId = queue[0];
+      const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+      console.log(index);
+      if (index === -1) setQueue((prev) => prev.slice(1));
+      const result = await fetch(
+        `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
+      );
+
+      if (result.noError) {
+        //test if the item does stil exist
+        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
+        tempPlaylist[index].directLink = result.directLink;
+      } else {
+        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
+      }
+      setQueue((prev) => prev.slice(1));
+      setPlaylist(tempPlaylist);
+      await sleep(3000);
+      if (shouldProcessQueue) procesarCola();
+    }
+  }
+
+  if (shouldProcessQueue) {
+    procesarCola();
+  }
 
   return (
     <div className="row">
