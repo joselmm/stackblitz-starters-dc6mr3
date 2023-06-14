@@ -75,9 +75,12 @@ export default function App() {
     console.log('ejecutando procesamiento en cola');
     if (!shouldProcessQueue) return;
     if (queue.length === 0) {
+      console.log('cola vacia');
       await sleep(1000);
       return procesarCola();
     }
+
+    console.log('cola NOOOOOOOOO vacia');
     const tempPlaylist = [...playlist];
     var videoId = queue[0];
     const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
