@@ -64,12 +64,12 @@ export default function App() {
     }
   }, [playlist]);
 
-  /*  useEffect(() => {
+  useEffect(() => {
     procesarCola();
     return () => {
       setShouldProcessQueue(false);
     };
-  }, []); */
+  }, []);
 
   function addToQueue() {
     const tempPlaylist = [...playlist];
