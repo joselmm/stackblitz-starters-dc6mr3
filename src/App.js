@@ -65,26 +65,33 @@ export default function App() {
   }, [playlist]); */
 
   useEffect(() => {
-    procesarCola();
     return () => {
       setShouldProcessQueue(false);
     };
   }, []);
-
+  procesarCola();
   async function procesarCola() {
     console.log('ejecutando procesamiento en cola');
+    console.log(queue);
+    console.log(shouldProcessQueue);
     if (!shouldProcessQueue) return;
+    console.log('hey');
     console.log('logitud cola ' + queue.length);
-    if (queue.length === 0) {
+    if (queue.length == 0) {
       console.log('cola vacia');
+   //   setShouldProcessQueue(false);
       await sleep(1000);
+
       return procesarCola();
+    } else {
+      setShouldProcessQueue(false);
+      console.log('cola NOOOOOOOOO vacia');
     }
 
-    console.log('cola NOOOOOOOOO vacia');
     const tempPlaylist = [...playlist];
     var videoId = queue[0];
     const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    console.log(index);
     if (index === -1) setQueue((prev) => prev.slice(1));
     const result = await fetch(
       `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`

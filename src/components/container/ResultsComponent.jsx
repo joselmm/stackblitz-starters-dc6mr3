@@ -32,8 +32,8 @@ const ResultComponent = ({
   }
 
   function removeFromPlaylist(videoId) {
-    console.log('remove');
-    console.log(queue);
+    //console.log('remove');
+   // console.log(queue);
 
     const tempPlaylist = [...playlist];
     let index = null;
