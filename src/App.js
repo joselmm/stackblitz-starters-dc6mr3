@@ -46,6 +46,9 @@ const playlistI2 = new PlaylistItem({
 });
 
 export default function App() {
+  /*  */
+  const [shouldProcessQueue, setShouldProcessQueue] = useState(true);
+
   /* videos state */
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
@@ -58,9 +61,15 @@ export default function App() {
   useEffect(() => {
     if (prevLengthRef.current < playlist.length) {
       addToQueue();
-      
     }
   }, [playlist]);
+
+  useEffect(() => {
+    procesarCola();
+    return () => {
+      setShouldProcessQueue(false);
+    };
+  }, []);
 
   function addToQueue() {
     const tempPlaylist = [...playlist];
@@ -77,6 +86,7 @@ export default function App() {
   }
 
   async function procesarCola() {
+    if (!shouldProcessQueue) return;
     if (queue.length === 0) {
       await sleep(1000);
       return procesarCola();
@@ -102,7 +112,6 @@ export default function App() {
     await sleep(1000);
     return procesarCola();
   }
-
 
   return (
     <div className="row">
