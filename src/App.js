@@ -58,6 +58,7 @@ export default function App() {
   useEffect(() => {
     if (prevLengthRef.current < playlist.length) {
       addToQueue();
+      
     }
   }, [playlist]);
 
@@ -101,6 +102,7 @@ export default function App() {
     await sleep(1000);
     return procesarCola();
   }
+
 
   return (
     <div className="row">
