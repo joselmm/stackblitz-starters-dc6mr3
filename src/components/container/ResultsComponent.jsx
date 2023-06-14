@@ -33,6 +33,8 @@ const ResultComponent = ({
 
   function removeFromPlaylist(videoId) {
     console.log('remove');
+    console.log(queue);
+
     const tempPlaylist = [...playlist];
     let index = null;
     var iteracion = 0;
@@ -57,6 +59,7 @@ const ResultComponent = ({
   function addToPlaylist(info) {
     //console.log(videos);
     console.log('add');
+    console.log(queue);
 
     const tempPlaylist = [...playlist];
     const playlistItem = new PlayListItem({
@@ -72,6 +75,7 @@ const ResultComponent = ({
     /* add to queue */
     const tempQueue = [...queue];
     tempQueue.push(info.videoId);
+    // console.log(tempQueue);
     setQueue(tempQueue);
   }
 
