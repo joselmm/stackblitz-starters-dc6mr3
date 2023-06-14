@@ -11,6 +11,7 @@ import SearchVideoComponent from './components/pure/SearchVideoComponent.jsx';
 import VideoCardInfo from './models/VideoCardInfo.class.js';
 import PlaylistItem from './models/PlaylistItem.class.js';
 import PLAYLIST_ITEM_STATE from './models/PlaylistItemState.enum.js';
+import sleep from './models/sleep.function.js';
 
 const videoInfo1 = new VideoCardInfo({
   title: 'Hey Mor - Ozuna Ft Feid (Official Video)',
@@ -48,7 +49,7 @@ export default function App() {
   /* videos state */
   const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
-  const [queue, setQueue] = useState([]);
+  let queue = [];
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
   const [currentPlayingId, setCurrentPlayingId] = useState('NO7EtdR3Dyw');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
@@ -56,13 +57,14 @@ export default function App() {
   //console.log(prevLengthRef);
   useEffect(() => {
     if (prevLengthRef.current < playlist.length) {
+      addToQueue();
     }
-  }, [playlist]); 
+  }, [playlist]);
 
   function addToQueue() {
     const tempPlaylist = [...playlist];
     let idx = 0;
-    for (let item of waitingItems) {
+    for (let item of tempPlaylist) {
       if (item.state === PLAYLIST_ITEM_STATE.WAITING) {
         if (!queue.includes(item.videoId))
           setQueue((prev) => [...prev, item.videoId]);
@@ -70,6 +72,34 @@ export default function App() {
       }
       idx++;
     }
+    setPlaylist(tempPlaylist);
+  }
+
+  async function procesarCola() {
+    if (queue.length === 0) {
+      await sleep(1000);
+      return procesarCola();
+    }
+    const tempPlaylist = [...playlist];
+    var videoId = queue[0];
+    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    if (index === -1) queue.shift();
+    const result = await fetch(
+      `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
+    );
+
+    if (result.noError) {
+      //test if the item does stil exist
+
+      tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
+      tempPlaylist[index].directLink = result.directLink;
+    } else {
+      tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
+    }
+    queue.shift();
+    setPlaylist(tempPlaylist);
+    await sleep(1000);
+    return procesarCola();
   }
 
   return (

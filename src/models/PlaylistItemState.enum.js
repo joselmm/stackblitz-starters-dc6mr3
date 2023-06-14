@@ -3,6 +3,7 @@ const PLAYLIST_ITEM_STATE = {
   PROCESSING: 'processing',
   WAITING: 'waiting',
   PLAYING: 'playing',
+  ERROR: 'error',
 };
 
 export default PLAYLIST_ITEM_STATE;
