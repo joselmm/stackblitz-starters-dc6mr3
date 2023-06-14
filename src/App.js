@@ -141,6 +141,7 @@ export default function App() {
         videos={videos}
         removeFromQueue={removeFromQueue}
         addToQueue={addToQueue}
+        queue={queue}
       />
       <SidebarComponent
         setCurrentPlayingId={setCurrentPlayingId}
