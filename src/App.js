@@ -58,11 +58,11 @@ export default function App() {
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
   const prevLengthRef = useRef(playlist.length);
   //console.log(prevLengthRef);
-  useEffect(() => {
+  /* useEffect(() => {
     if (prevLengthRef.current < playlist.length) {
-      addToQueue();
+      console.log(prevLengthRef.current, playlist.length);
     }
-  }, [playlist]);
+  }, [playlist]); */
 
   useEffect(() => {
     procesarCola();
@@ -70,21 +70,6 @@ export default function App() {
       setShouldProcessQueue(false);
     };
   }, []);
-
-  function addToQueue() {
-    console.log('añadiendo a cola');
-    const tempPlaylist = [...playlist];
-    let idx = 0;
-    for (let item of tempPlaylist) {
-      if (item.state === PLAYLIST_ITEM_STATE.WAITING) {
-        if (!queue.includes(item.videoId))
-          setQueue((prev) => [...prev, item.videoId]);
-        tempPlaylist[idx].state = PLAYLIST_ITEM_STATE.PROCESSING;
-      }
-      idx++;
-    }
-    setPlaylist(tempPlaylist);
-  }
 
   async function procesarCola() {
     console.log('ejecutando procesamiento en cola');
@@ -111,7 +96,7 @@ export default function App() {
     }
     setQueue((prev) => prev.slice(1));
     setPlaylist(tempPlaylist);
-    await sleep(1000);
+    await sleep(3000);
     return procesarCola();
   }
 
@@ -131,6 +116,8 @@ export default function App() {
         setPlaylist={setPlaylist}
         setVideos={setVideos}
         videos={videos}
+        queue={queue}
+        setQueue={setQueue}
       />
       <SidebarComponent
         setCurrentPlayingId={setCurrentPlayingId}

@@ -3,7 +3,14 @@ import PlayListItem from '../../models/PlaylistItem.class.js';
 import PLAYLIST_ITEM_STATE from '../../models/PlaylistItemState.enum.js';
 import VideoCardComponent from '../pure/VideoCardComponent.jsx';
 
-const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
+const ResultComponent = ({
+  videos,
+  setVideos,
+  setPlaylist,
+  playlist,
+  queue,
+  setQueue,
+}) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
     console.log(videoInfo);
@@ -39,6 +46,12 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
       tempPlaylist.splice(index, 1);
       setPlaylist(tempPlaylist);
     }
+
+    /* remove from queue */
+    const tempQueue = [...queue];
+    const indexQueueItem = tempQueue.indexOf(videoId);
+    tempQueue.splice(indexQueueItem, 1);
+    setQueue(tempQueue);
   }
 
   function addToPlaylist(info) {
@@ -55,6 +68,11 @@ const ResultComponent = ({ videos, setVideos, setPlaylist, playlist }) => {
     });
     tempPlaylist.push(playlistItem);
     setPlaylist(tempPlaylist);
+
+    /* add to queue */
+    const tempQueue = [...queue];
+    tempQueue.push(info.videoId);
+    setQueue(tempQueue);
   }
 
   return (
