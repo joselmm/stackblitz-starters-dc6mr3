@@ -74,6 +74,7 @@ export default function App() {
   async function procesarCola() {
     console.log('ejecutando procesamiento en cola');
     if (!shouldProcessQueue) return;
+    console.log('logitud cola ' + queue.length);
     if (queue.length === 0) {
       console.log('cola vacia');
       await sleep(1000);
