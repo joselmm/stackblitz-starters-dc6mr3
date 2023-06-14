@@ -75,33 +75,43 @@ export default function App() {
   }
 
   useEffect(() => {
+    setShouldProcessQueue(false);
     return () => {
-      setShouldProcessQueue(false);
+      console.log('valor es  ' + shouldProcessQueue);
     };
-  }, [shouldProcessQueue]);
+  }, []);
 
-  async function procesarCola() {
+  useEffect(() => {
+    console.log('cambio de queue: ');
+    console.log(queue, shouldProcessQueue);
+    procesarCola(queue);
+  }, [queue]);
+
+  async function procesarCola(queue) {
+    //console.log(shouldProcessQueue);
     console.log('ejecutando procesamiento en cola');
+    //if (!shouldProcessQueue) return;
+    console.log('ejecutando procesamiento en cola');
+
+    /*var queue = [...queue];
     console.log(queue);
     console.log(shouldProcessQueue);
-    if (!shouldProcessQueue) return;
-    console.log('hey');
+    console.log('hey'); */
     console.log('logitud cola ' + queue.length);
-    if (queue.length === 0) {
-      console.log('cola vacia');
-      //   setShouldProcessQueue(false);
-      await sleep(1000);
+    if (queue.length > 0) {
+      console.log('cola NOOO vacia');
 
-      return procesarCola();
-    } else {
       const tempPlaylist = [...playlist];
       var videoId = queue[0];
       const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
-      console.log(index);
+      console.log('index del item procesando: ' + index);
+      console.log('videoID: ' + videoId);
       if (index === -1) setQueue((prev) => prev.slice(1));
       const result = await fetch(
         `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
-      );
+      )
+        .then((res) => res.json())
+        .then((res) => res);
 
       if (result.noError) {
         //test if the item does stil exist
@@ -112,14 +122,15 @@ export default function App() {
       }
       setQueue((prev) => prev.slice(1));
       setPlaylist(tempPlaylist);
-      await sleep(3000);
+      //await sleep(3000);
       if (shouldProcessQueue) procesarCola();
+      //   setShouldProcessQueue(false);
     }
   }
 
-  if (shouldProcessQueue) {
+  /* if (shouldProcessQueue) {
     procesarCola();
-  }
+  } */
 
   return (
     <div className="row">

@@ -6,11 +6,13 @@ const SideBarContext = React.createContext();
 
 const PlaylistComponent = () => {
   const state = useContext(SideBarContext);
-
+  function play(videoId) {
+    state.setCurrentPlayingId(videoId);
+  }
   return (
     <div>
       {state.playlist.map((item, idx) => (
-        <PlaylistItemComponent key={idx} itemInfo={item} />
+        <PlaylistItemComponent play={play} key={idx} itemInfo={item} />
       ))}
     </div>
   );
