@@ -7,6 +7,7 @@ const SideBarContext = React.createContext();
 const PlaylistComponent = () => {
   const state = useContext(SideBarContext);
   function play(videoId) {
+    console.log('reproduciendo');
     state.setCurrentPlayingId(videoId);
   }
   return (
