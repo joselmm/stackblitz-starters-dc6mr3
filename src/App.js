@@ -64,51 +64,62 @@ export default function App() {
     }
   }, [playlist]); */
 
+  function removeFromQueue(videoId) {
+    setQueue((prevQueue) => prevQueue.filter((id) => id !== videoId));
+  }
+
+  function addToQueue(videoId) {
+    if (!queue.includes(videoId)) {
+      setQueue((prevQueue) => [...prevQueue, videoId]);
+    }
+  }
+
   useEffect(() => {
+    async function procesarCola() {
+      console.log('ejecutando procesamiento en cola');
+      console.log(queue);
+      console.log(shouldProcessQueue);
+      if (!shouldProcessQueue) return;
+      console.log('hey');
+      console.log('logitud cola ' + queue.length);
+      if (queue.length === 0) {
+        console.log('cola vacia');
+        //   setShouldProcessQueue(false);
+        await sleep(1000);
+
+        return procesarCola();
+      }
+
+      const tempPlaylist = [...playlist];
+      var videoId = queue[0];
+      const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+      console.log(index);
+      if (index === -1) setQueue((prev) => prev.slice(1));
+      const result = await fetch(
+        `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
+      );
+
+      if (result.noError) {
+        //test if the item does stil exist
+        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
+        tempPlaylist[index].directLink = result.directLink;
+      } else {
+        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
+      }
+      setQueue((prev) => prev.slice(1));
+      setPlaylist(tempPlaylist);
+      await sleep(3000);
+      return procesarCola();
+    }
+
+    if (shouldProcessQueue) {
+      procesarCola();
+    }
+
     return () => {
       setShouldProcessQueue(false);
     };
-  }, []);
-  procesarCola();
-  async function procesarCola() {
-    console.log('ejecutando procesamiento en cola');
-    console.log(queue);
-    console.log(shouldProcessQueue);
-    if (!shouldProcessQueue) return;
-    console.log('hey');
-    console.log('logitud cola ' + queue.length);
-    if (queue.length == 0) {
-      console.log('cola vacia');
-   //   setShouldProcessQueue(false);
-      await sleep(1000);
-
-      return procesarCola();
-    } else {
-      setShouldProcessQueue(false);
-      console.log('cola NOOOOOOOOO vacia');
-    }
-
-    const tempPlaylist = [...playlist];
-    var videoId = queue[0];
-    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
-    console.log(index);
-    if (index === -1) setQueue((prev) => prev.slice(1));
-    const result = await fetch(
-      `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
-    );
-
-    if (result.noError) {
-      //test if the item does stil exist
-      tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
-      tempPlaylist[index].directLink = result.directLink;
-    } else {
-      tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
-    }
-    setQueue((prev) => prev.slice(1));
-    setPlaylist(tempPlaylist);
-    await sleep(3000);
-    return procesarCola();
-  }
+  }, [shouldProcessQueue]);
 
   return (
     <div className="row">
@@ -126,8 +137,8 @@ export default function App() {
         setPlaylist={setPlaylist}
         setVideos={setVideos}
         videos={videos}
-        queue={queue}
-        setQueue={setQueue}
+        removeFromQueue={removeFromQueue}
+        addToQueue={addToQueue}
       />
       <SidebarComponent
         setCurrentPlayingId={setCurrentPlayingId}

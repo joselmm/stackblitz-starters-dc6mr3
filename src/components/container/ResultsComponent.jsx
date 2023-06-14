@@ -8,8 +8,8 @@ const ResultComponent = ({
   setVideos,
   setPlaylist,
   playlist,
-  queue,
-  setQueue,
+  removeFromQueue,
+  addToQueue,
 }) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
@@ -33,7 +33,7 @@ const ResultComponent = ({
 
   function removeFromPlaylist(videoId) {
     //console.log('remove');
-   // console.log(queue);
+    console.log(queue);
 
     const tempPlaylist = [...playlist];
     let index = null;
@@ -50,16 +50,13 @@ const ResultComponent = ({
     }
 
     /* remove from queue */
-    const tempQueue = [...queue];
-    const indexQueueItem = tempQueue.indexOf(videoId);
-    tempQueue.splice(indexQueueItem, 1);
-    setQueue(tempQueue);
+    removeFromQueue(videoId);
   }
 
   function addToPlaylist(info) {
     //console.log(videos);
     console.log('add');
-    console.log(queue);
+    // console.log(queue);
 
     const tempPlaylist = [...playlist];
     const playlistItem = new PlayListItem({
@@ -73,10 +70,7 @@ const ResultComponent = ({
     setPlaylist(tempPlaylist);
 
     /* add to queue */
-    const tempQueue = [...queue];
-    tempQueue.push(info.videoId);
-    // console.log(tempQueue);
-    setQueue(tempQueue);
+    addToQueue(info.videoId);
   }
 
   return (
