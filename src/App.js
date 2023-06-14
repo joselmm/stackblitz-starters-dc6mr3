@@ -72,6 +72,7 @@ export default function App() {
   }, []);
 
   function addToQueue() {
+    console.log("añadiendo a cola");
     const tempPlaylist = [...playlist];
     let idx = 0;
     for (let item of tempPlaylist) {
@@ -86,7 +87,7 @@ export default function App() {
   }
 
   async function procesarCola() {
-    console.log('ejecutando');
+    console.log('ejecutando procesamiento en cola');
     if (!shouldProcessQueue) return;
     if (queue.length === 0) {
       await sleep(1000);
