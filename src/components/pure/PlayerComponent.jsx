@@ -26,10 +26,13 @@ const tracks = [
 const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
   //const htmlplayerRef = useRef();
   //console.log(playlist);
-  const currentPlayingItem = playlist.find(
-    (item) => item.videoId === currentPlayingId
-  );
-  const currentSrc = currentPlayingItem.directLink;
+  let currentSrc=""
+  if(playlist.length){
+    const currentPlayingItem = playlist.find(
+      (item) => item.videoId === currentPlayingId
+    );
+    const currentSrc = currentPlayingItem.directLink;
+  }
   return (
     <div>
       <AudioPlayer

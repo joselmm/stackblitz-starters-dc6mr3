@@ -50,11 +50,13 @@ export default function App() {
   const [shouldProcessQueue, setShouldProcessQueue] = useState(true);
   const [queue, setQueue] = useState([]);
   /* videos state */
-  const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
+  const [videos, setVideos] = useState([
+    /* videoInfo1, videoInfo2 */
+  ]);
   /* playlist state */
 
   const [playlist, setPlaylist] = useState([playlistI1, playlistI2]);
-  const [currentPlayingId, setCurrentPlayingId] = useState('NO7EtdR3Dyw');
+  const [currentPlayingId, setCurrentPlayingId] = useState('');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
   const prevLengthRef = useRef(playlist.length);
   //console.log(prevLengthRef);
