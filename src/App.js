@@ -86,6 +86,7 @@ export default function App() {
   }
 
   async function procesarCola() {
+    console.log('ejecutando');
     if (!shouldProcessQueue) return;
     if (queue.length === 0) {
       await sleep(1000);
