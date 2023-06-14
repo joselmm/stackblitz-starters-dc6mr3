@@ -88,28 +88,30 @@ export default function App() {
         await sleep(1000);
 
         return procesarCola();
-      }
-
-      const tempPlaylist = [...playlist];
-      var videoId = queue[0];
-      const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
-      console.log(index);
-      if (index === -1) setQueue((prev) => prev.slice(1));
-      const result = await fetch(
-        `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
-      );
-
-      if (result.noError) {
-        //test if the item does stil exist
-        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
-        tempPlaylist[index].directLink = result.directLink;
       } else {
-        tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
+        const tempPlaylist = [...playlist];
+        var videoId = queue[0];
+        const index = tempPlaylist.findIndex(
+          (item) => item.videoId === videoId
+        );
+        console.log(index);
+        if (index === -1) setQueue((prev) => prev.slice(1));
+        const result = await fetch(
+          `https://script.google.com/macros/s/AKfycbxbo8pCIXSVEaL3o9XYQrKqlyGq4tr1-eAXBrTUZ7PdTwOjFdzHaTC9fBFokNrvOLal/exec?videoId=${videoId}`
+        );
+
+        if (result.noError) {
+          //test if the item does stil exist
+          tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
+          tempPlaylist[index].directLink = result.directLink;
+        } else {
+          tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
+        }
+        setQueue((prev) => prev.slice(1));
+        setPlaylist(tempPlaylist);
+        await sleep(3000);
+        return procesarCola();
       }
-      setQueue((prev) => prev.slice(1));
-      setPlaylist(tempPlaylist);
-      await sleep(3000);
-      return procesarCola();
     }
 
     if (shouldProcessQueue) {
