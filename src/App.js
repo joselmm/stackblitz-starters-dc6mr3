@@ -89,6 +89,14 @@ export default function App() {
     procesarCola(queue);
   }, [queue]);
 
+  useEffect(() => {
+    const tempPlaylist = [...playlist];
+    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    if (index === -1) return;
+    tempPlaylist[index].state = PLAYLIST_ITEM_STATE.PLAYING;
+    props.setPlaylist(tempPlaylist);
+  }, [currentPlayingId]);
+
   async function procesarCola(queue) {
     //console.log(shouldProcessQueue);
     console.log('ejecutando procesamiento en cola');
