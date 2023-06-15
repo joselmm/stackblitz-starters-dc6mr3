@@ -36,7 +36,7 @@ const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
   return (
     <div>
       <AudioPlayer
-        onEnded={()=>{console.log("ended event");}}
+        onEnded={()=>{console.log("ended event"); nextTrack();}}
         showSkipControls={true}
         showJumpControls={false}
         src={currentSrc}
