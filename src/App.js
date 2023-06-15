@@ -91,10 +91,18 @@ export default function App() {
 
   useEffect(() => {
     const tempPlaylist = [...playlist];
-    const index = tempPlaylist.findIndex((item) => item.videoId === currentPlayingId);
+    tempPlaylist.forEach((item, idx) => {
+      if (item.state === PLAYLIST_ITEM_STATE.PLAYING) {
+        tempPlaylist[idx].state = PLAYLIST_ITEM_STATE.READY;
+      }
+    });
+
+    const index = tempPlaylist.findIndex(
+      (item) => item.videoId === currentPlayingId
+    );
     if (index === -1) return;
     tempPlaylist[index].state = PLAYLIST_ITEM_STATE.PLAYING;
-    props.setPlaylist(tempPlaylist);
+    setPlaylist(tempPlaylist);
   }, [currentPlayingId]);
 
   async function procesarCola(queue) {
