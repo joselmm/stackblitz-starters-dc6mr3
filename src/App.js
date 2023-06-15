@@ -91,7 +91,7 @@ export default function App() {
 
   useEffect(() => {
     const tempPlaylist = [...playlist];
-    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    const index = tempPlaylist.findIndex((item) => item.videoId === currentPlayingId);
     if (index === -1) return;
     tempPlaylist[index].state = PLAYLIST_ITEM_STATE.PLAYING;
     props.setPlaylist(tempPlaylist);
