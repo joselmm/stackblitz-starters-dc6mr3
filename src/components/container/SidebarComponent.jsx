@@ -18,7 +18,9 @@ const PlaylistComponent = ({ play }) => {
 };
 
 const SidebarComponent = (props) => {
-  function playTrack(videoId) {
+  
+
+  function playSelectedTrack(videoId) {
     console.log('reproduciendo: ' + videoId);
     props.setCurrentPlayingId(videoId);
   }
@@ -26,7 +28,7 @@ const SidebarComponent = (props) => {
     if (props.setCurrentPlayingId === '') return;
     console.log('pase la prueba de si hay algo reproduciendo');
     const indexCurrentlyPlaying = props.playlist.findIndex(
-      (item) => item.videoId === props.setCurrentPlayingId
+      (item) => item.videoId === props.currentPlayingId
     );
     if (indexCurrentlyPlaying === -1) {
       console.log(
@@ -46,7 +48,7 @@ const SidebarComponent = (props) => {
       console.log(
         '1---SIIII pase la prueba de si hay algo de primero para reproducir'
       );
-      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex]);
+      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex].videoId);
       return;
     }
     console.log(
@@ -71,13 +73,13 @@ const SidebarComponent = (props) => {
         props.setCurrentPlayingId('');
         return;
       }
-      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex]);
+      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex].videoId);
       return;
     }
     console.log(
       '2---Pase la pruba de si hay algo siguiente para reproducir'
     );
-    props.setCurrentPlayingId(props.playlist[nextAvailableItemIndex]);
+    props.setCurrentPlayingId(props.playlist[nextAvailableItemIndex].videoId);
   }
   return (
     <SideBarContext.Provider value={props}>
@@ -87,7 +89,7 @@ const SidebarComponent = (props) => {
           playlist={props.playlist}
           next={nextTrack}
         />
-        <PlaylistComponent play={playTrack} />
+        <PlaylistComponent play={playSelectedTrack} />
       </div>
     </SideBarContext.Provider>
   );
