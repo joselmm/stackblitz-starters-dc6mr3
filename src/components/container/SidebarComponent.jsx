@@ -21,11 +21,6 @@ const SidebarComponent = (props) => {
   function playSelectedTrack(videoId) {
     //console.log('reproduciendo: ' + videoId);
     props.setCurrentPlayingId(videoId);
-    const tempPlaylist = [...props.playlist];
-    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
-    if (index === -1) return;
-    tempPlaylist[index].state = PLAYLIST_ITEM_STATE.PLAYING;
-    props.setPlaylist(tempPlaylist);
   }
   function nextTrack() {
     if (props.setCurrentPlayingId === '') return;
