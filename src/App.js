@@ -115,11 +115,14 @@ export default function App() {
         .then((res) => res.json())
         .then((res) => res);
 
-      if (result.noError) {
-        //test if the item does stil exist
+      //test if the item does stil exist
+      const doesStillExist =
+        playlist.findIndex((item) => item.videoId === videoId) > -1;
+
+      if (result.noError && doesStillExist) {
         tempPlaylist[index].state = PLAYLIST_ITEM_STATE.READY;
         tempPlaylist[index].directLink = result.directLink;
-      } else {
+      } else if (doesStillExist) {
         tempPlaylist[index].state = PLAYLIST_ITEM_STATE.ERROR;
       }
       setQueue((prev) => prev.slice(1));
