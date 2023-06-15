@@ -41,6 +41,7 @@ const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
         showJumpControls={false}
         src={currentSrc}
         onPlay={(e) => console.log('onPlay')}
+        onClickNext={()=>{next()}}
         // other props here
       />
     </div>
