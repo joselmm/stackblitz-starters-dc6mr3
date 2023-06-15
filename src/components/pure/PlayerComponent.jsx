@@ -27,21 +27,26 @@ const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
   //const htmlplayerRef = useRef();
   //console.log(playlist);
   let currentSrc = '';
-  if (playlist.length>0) {
+  if (playlist.length > 0) {
     const currentPlayingItem = playlist.find(
       (item) => item.videoId === currentPlayingId
     );
-    currentSrc = currentPlayingItem?currentPlayingItem.directLink:"";
+    currentSrc = currentPlayingItem ? currentPlayingItem.directLink : '';
   }
   return (
     <div>
       <AudioPlayer
-        onEnded={()=>{console.log("ended event"); nextTrack();}}
+        onEnded={() => {
+          console.log('ended event');
+          next(); 
+        }}
         showSkipControls={true}
         showJumpControls={false}
         src={currentSrc}
         onPlay={(e) => console.log('onPlay')}
-        onClickNext={()=>{next()}}
+        onClickNext={() => {
+          next();
+        }}
         // other props here
       />
     </div>
