@@ -145,7 +145,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
     <div className="col-6">
       <form onSubmit={(e) => searchVideos(e)} className="input-group">
         <input
-          /* disabled */
+          disabled
           onChange={suggestions}
           onKeyDown={handleKeyDown}
           ref={inputSearchRef}

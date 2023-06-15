@@ -5,8 +5,17 @@ import PLAYLIST_ITEM_STATE from '../../models/PlaylistItemState.enum.js';
 
 const PlaylistItemComponent = ({ itemInfo, play }) => {
   return (
-    <div onClick={(itemInfo.state===PLAYLIST_ITEM_STATE.READY)?() => play(itemInfo.videoId):()=>console.log("no listo")} className="p-1">
-      <p>{itemInfo.title}</p>
+    <div
+      onClick={
+        itemInfo.state === PLAYLIST_ITEM_STATE.READY
+          ? () => play(itemInfo.videoId)
+          : () => console.log('no listo')
+      }
+      className="p-1"
+    >
+      <p style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+        {itemInfo.title}
+      </p>
       <p>{itemInfo.state}</p>
     </div>
   );
