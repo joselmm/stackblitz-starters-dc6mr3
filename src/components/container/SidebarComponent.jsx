@@ -18,11 +18,14 @@ const PlaylistComponent = ({ play }) => {
 };
 
 const SidebarComponent = (props) => {
-  
-
   function playSelectedTrack(videoId) {
-    console.log('reproduciendo: ' + videoId);
+    //console.log('reproduciendo: ' + videoId);
     props.setCurrentPlayingId(videoId);
+    const tempPlaylist = [...props.playlist];
+    const index = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    if (index === -1) return;
+    tempPlaylist[index].state = PLAYLIST_ITEM_STATE.PLAYING;
+    props.setPlaylist(tempPlaylist);
   }
   function nextTrack() {
     if (props.setCurrentPlayingId === '') return;
@@ -48,7 +51,9 @@ const SidebarComponent = (props) => {
       console.log(
         '1---SIIII pase la prueba de si hay algo de primero para reproducir'
       );
-      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex].videoId);
+      props.setCurrentPlayingId(
+        props.playlist[firstAvailableItemIndex].videoId
+      );
       return;
     }
     console.log(
@@ -60,25 +65,21 @@ const SidebarComponent = (props) => {
         item.state === PLAYLIST_ITEM_STATE.READY && idx > indexCurrentlyPlaying
     );
     if (nextAvailableItemIndex === -1) {
-      console.log(
-        'NO PASE LA PRUEBA DE SI HAY ALGO SIGUIENTE PARA REPRODUCIR'
-      );
+      console.log('NO PASE LA PRUEBA DE SI HAY ALGO SIGUIENTE PARA REPRODUCIR');
       const firstAvailableItemIndex = props.playlist.findIndex(
         (item) => item.state === PLAYLIST_ITEM_STATE.READY
       );
       if (firstAvailableItemIndex === -1) {
-        console.log(
-          'NO PASE LA PRUEBA DE SI HAY ALGO PRIMERO PARA REPRODUCIR'
-        );
+        console.log('NO PASE LA PRUEBA DE SI HAY ALGO PRIMERO PARA REPRODUCIR');
         props.setCurrentPlayingId('');
         return;
       }
-      props.setCurrentPlayingId(props.playlist[firstAvailableItemIndex].videoId);
+      props.setCurrentPlayingId(
+        props.playlist[firstAvailableItemIndex].videoId
+      );
       return;
     }
-    console.log(
-      '2---Pase la pruba de si hay algo siguiente para reproducir'
-    );
+    console.log('2---Pase la pruba de si hay algo siguiente para reproducir');
     props.setCurrentPlayingId(props.playlist[nextAvailableItemIndex].videoId);
   }
   return (
