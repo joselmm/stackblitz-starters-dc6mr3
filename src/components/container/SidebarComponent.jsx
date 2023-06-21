@@ -142,6 +142,45 @@ const SidebarComponent = (props) => {
       props.playlist[indexCurrentlyPlaying - prevAvailableItemIndex - 1].videoId
     );
   }
+
+  function moveItemUp(videoId) {
+    const tempPlaylist = [...props.playlist];
+    const itemIdx = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    if (itemIdx === -1) return;
+
+    if (itemIdx === 0) {
+      const item = tempPlaylist[itemIdx];
+      for (let i = 0; i < tempPlaylist.length; i++) {
+        tempPlaylist[i] = tempPlaylist[i + 1];
+      }
+      tempPlaylist[0] = item;
+      props.setPlaylist(tempPlaylist);
+      return;
+    }
+  }
+
+  function moveItemDown(videoId) {
+    const tempPlaylist = [...props.playlist];
+    const itemIdx = tempPlaylist.findIndex((item) => item.videoId === videoId);
+    if (itemIdx === -1) return;
+    // Intercambia el elemento en la posición "itemIdx" con el elemento en la posición siguiente
+
+    if (itemIdx === tempPlaylist.length - 1) {
+      const item = tempPlaylist[itemIdx];
+      for (let i = 1; i < tempPlaylist.length; i++) {
+        tempPlaylist[i] = tempPlaylist[i - 1];
+      }
+      tempPlaylist[0] = item;
+      props.setPlaylist(tempPlaylist);
+      return;
+    }
+
+    const nextItem = tempPlaylist[itemIdx + 1];
+    tempPlaylist[itemIdx + 1] = tempPlaylist[itemIdx];
+    tempPlaylist[itemIdx] = nextItem;
+    props.setPlaylist(tempPlaylist);
+  }
+
   return (
     <SideBarContext.Provider value={props}>
       <div className="col-3 bg-primary">
