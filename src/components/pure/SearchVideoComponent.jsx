@@ -28,13 +28,14 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
     /* inputSearchRef.current.value */
 
     var encodedQuery = encodeURIComponent(query);
+    console.log(encodedQuery);
     var searchResults = await fetch(
-      `https://yt-info-1y11.onrender.com/buscarVideo/${encodedQuery}`
+      `https://wlkkpr-3000.csb.app/search-yt/${encodedQuery}/12/1`
     )
       .then((res) => res.json())
       .then((res) => res);
     const tempArray = [];
-    for (let videoItem of searchResults.items) {
+    for (let videoItem of searchResults) {
       if (videoItem.type != 'video') continue;
 
       let addedToPlayList = false;
@@ -51,7 +52,7 @@ const SearchVideoComponent = ({ setVideos, playlist }) => {
         poster: `https://i.ytimg.com/vi/${videoItem.id}/0.jpg`,
         addedToPlayList: addedToPlayList,
         videoId: videoItem.id,
-        duration: videoItem.duration,
+        duration: videoItem.durationFormatted,
         views: etiquetarNumero(videoItem.views),
       });
       //console.log(videoCardInfo);

@@ -11,7 +11,7 @@ import SearchVideoComponent from './components/pure/SearchVideoComponent.jsx';
 import VideoCardInfo from './models/VideoCardInfo.class.js';
 import PlaylistItem from './models/PlaylistItem.class.js';
 import PLAYLIST_ITEM_STATE from './models/PlaylistItemState.enum.js';
-import sleep from './models/sleep.function.js';
+//import sleep from './models/sleep.function.js';
 
 const videoInfo1 = new VideoCardInfo({
   title: 'Hey Mor - Ozuna Ft Feid (Official Video)',
