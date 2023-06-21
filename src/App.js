@@ -37,6 +37,7 @@ const playlistI1 = new PlaylistItem({
     'https://drive.google.com/uc?id=1qewde2jNra6CYgD8us-7y_N166bRN1pE',
   poster: '',
   videoId: 'NO7EtdR3Dyw',
+  state:"error"
 });
 const playlistI2 = new PlaylistItem({
   title: 'Hey Mor - Ozuna Ft Feid (Official Video)',

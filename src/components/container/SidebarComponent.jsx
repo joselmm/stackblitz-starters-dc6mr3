@@ -77,6 +77,71 @@ const SidebarComponent = (props) => {
     console.log('2---Pase la pruba de si hay algo siguiente para reproducir');
     props.setCurrentPlayingId(props.playlist[nextAvailableItemIndex].videoId);
   }
+
+  function prevTrack() {
+    if (props.setCurrentPlayingId === '') return;
+    console.log('pase la prueba de si hay algo reproduciendo');
+    const indexCurrentlyPlaying = props.playlist.findIndex(
+      (item) => item.videoId === props.currentPlayingId
+    );
+    if (indexCurrentlyPlaying === -1) {
+      console.log(
+        'NOOOO pase la prueba de si aun esta el actual reproduciendo en la lista'
+      );
+
+      const lastAvailableItemIndex = props.playlist
+        .slice()
+        .reverse()
+        .findIndex((item) => item.state === PLAYLIST_ITEM_STATE.READY);
+
+      if (lastAvailableItemIndex === -1) {
+        console.log(
+          'NOOOO pase la prueba de si hay algo de ultimo para reproducir'
+        );
+        props.setCurrentPlayingId('');
+        return;
+      }
+      console.log(
+        '1---SIIII pase la prueba de si hay algo de ultimo para reproducir'
+      );
+      props.setCurrentPlayingId(
+        props.playlist[props.playlist.length - lastAvailableItemIndex - 1]
+          .videoId
+      );
+      return;
+    }
+    console.log(
+      'pase la prueba de si aun esta el actual reproduciendo en la lista'
+    );
+
+    const prevAvailableItemIndex = props.playlist
+      .slice(0, indexCurrentlyPlaying)
+      .reverse()
+      .findIndex((item) => item.state === PLAYLIST_ITEM_STATE.READY);
+
+    if (prevAvailableItemIndex === -1) {
+      console.log('NO PASE LA PRUEBA DE SI HAY ALGO ANTERIOR PARA REPRODUCIR');
+      const lastAvailableItemIndex = props.playlist
+        .slice()
+        .reverse()
+        .findIndex((item) => item.state === PLAYLIST_ITEM_STATE.READY);
+
+      if (lastAvailableItemIndex === -1) {
+        console.log('NO PASE LA PRUEBA DE SI HAY ALGO ULTIMO PARA REPRODUCIR');
+        props.setCurrentPlayingId('');
+        return;
+      }
+      props.setCurrentPlayingId(
+        props.playlist[props.playlist.length - lastAvailableItemIndex - 1]
+          .videoId
+      );
+      return;
+    }
+    console.log('2---Pase la pruba de si hay algo anterior para reproducir');
+    props.setCurrentPlayingId(
+      props.playlist[indexCurrentlyPlaying - prevAvailableItemIndex - 1].videoId
+    );
+  }
   return (
     <SideBarContext.Provider value={props}>
       <div className="col-3 bg-primary">
@@ -84,6 +149,7 @@ const SidebarComponent = (props) => {
           currentPlayingId={props.currentPlayingId}
           playlist={props.playlist}
           next={nextTrack}
+          previous={prevTrack}
         />
         <PlaylistComponent play={playSelectedTrack} />
       </div>

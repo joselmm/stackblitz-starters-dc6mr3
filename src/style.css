@@ -13,6 +13,12 @@ p {
   cursor: pointer;
 }
 
+.cursor-default {
+  cursor: default;
+}
+
 button:disabled {
   opacity: 0.5;
 }
+
+/* playlist items classes*/

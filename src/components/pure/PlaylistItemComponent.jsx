@@ -34,10 +34,13 @@ const PlaylistItemComponent = ({ itemInfo, play }) => {
       }
       className={'p-1 ' + classes}
     >
-      <p style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+      <p
+        className="cursor-default"
+        title={itemInfo.title}
+        style={{ whiteSpace: 'nowrap', overflow: 'hidden', margin: '0' }}
+      >
         {itemInfo.title}
       </p>
-      {/* <p>{itemInfo.state}</p> */}
     </div>
   );
 };

@@ -38,7 +38,7 @@ const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
       <AudioPlayer
         onEnded={() => {
           console.log('ended event');
-          next(); 
+          next();
         }}
         showSkipControls={true}
         showJumpControls={false}
@@ -46,6 +46,9 @@ const PlayerComponent = ({ playlist, currentPlayingId, next, previous }) => {
         onPlay={(e) => console.log('onPlay')}
         onClickNext={() => {
           next();
+        }}
+        onClickPrevious={() => {
+          previous();
         }}
         // other props here
       />
