@@ -37,7 +37,7 @@ const PlaylistItemComponent = ({ itemInfo, play }) => {
       <p style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
         {itemInfo.title}
       </p>
-      <p>{itemInfo.state}</p>
+      {/* <p>{itemInfo.state}</p> */}
     </div>
   );
 };
