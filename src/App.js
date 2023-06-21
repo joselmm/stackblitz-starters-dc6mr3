@@ -52,7 +52,7 @@ export default function App() {
   const [queue, setQueue] = useState([]);
   /* videos state */
   const [videos, setVideos] = useState([
-    /* videoInfo1, videoInfo2 */
+    videoInfo1, videoInfo2
   ]);
   /* playlist state */
 
