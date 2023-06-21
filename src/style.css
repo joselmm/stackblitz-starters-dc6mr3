@@ -21,4 +21,8 @@ button:disabled {
   opacity: 0.5;
 }
 
-/* playlist items classes*/
+/* playlist items classes depending on item state*/
+/* 
+.playlist-item-error{
+  background-color: ;
+} */
