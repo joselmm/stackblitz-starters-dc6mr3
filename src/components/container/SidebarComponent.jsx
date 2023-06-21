@@ -5,13 +5,19 @@ import PlaylistItemComponent from '../pure/PlaylistItemComponent';
 
 const SideBarContext = React.createContext();
 
-const PlaylistComponent = ({ play }) => {
+const PlaylistComponent = ({ play, moveDown, moveUp }) => {
   const state = useContext(SideBarContext);
 
   return (
     <div>
       {state.playlist.map((item, idx) => (
-        <PlaylistItemComponent play={play} key={idx} itemInfo={item} />
+        <PlaylistItemComponent
+          moveDown={moveDown}
+          moveUp={moveUp}
+          play={play}
+          key={idx}
+          itemInfo={item}
+        />
       ))}
     </div>
   );
