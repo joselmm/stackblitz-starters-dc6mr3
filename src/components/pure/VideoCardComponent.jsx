@@ -17,7 +17,7 @@ const VideoCardComponent = ({ info, toggleAddToPlaylist }) => {
   }
 
   return (
-    <div className="card col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 bg-dark">
+    <div className="card col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 bg-dark text-white">
       <img src={info.poster} className="card-img-top" alt="Título del video" />
       <div className="card-body">
         <h5 className="card-title">{info.title}</h5>
