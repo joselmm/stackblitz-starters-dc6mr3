@@ -37,7 +37,7 @@ const playlistI1 = new PlaylistItem({
     'https://drive.google.com/uc?id=1qewde2jNra6CYgD8us-7y_N166bRN1pE',
   poster: '',
   videoId: 'NO7EtdR3Dyw',
-  state:"error"
+  state: 'error',
 });
 const playlistI2 = new PlaylistItem({
   title: 'Hey Mor - Ozuna Ft Feid (Official Video)',
@@ -56,7 +56,9 @@ export default function App() {
   ]);
   /* playlist state */
 
-  const [playlist, setPlaylist] = useState([/* playlistI1, playlistI2 */]);
+  const [playlist, setPlaylist] = useState([
+    /* playlistI1, playlistI2 */
+  ]);
   const [currentPlayingId, setCurrentPlayingId] = useState('');
   //https://drive.google.com/uc?id=1spdzsDzJJbNbi9H2lbsGN3VzcFJ2DlGg
   const prevLengthRef = useRef(playlist.length);
@@ -155,7 +157,7 @@ export default function App() {
   } */
 
   return (
-    <div className="row">
+    <div className="row bg-dark">
       <header className="col-12 mt-3 mb-3">
         <div className="row">
           <div className="col-3"></div>

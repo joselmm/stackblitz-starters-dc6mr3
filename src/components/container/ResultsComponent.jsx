@@ -74,7 +74,7 @@ const ResultsComponent = ({
   }
 
   return (
-    <div className="row col-9">
+    <div className="row col-9 ">
       {videos.map((vf, idx) => (
         <VideoCardComponent
           removeFromPlaylist={removeFromPlaylist}
