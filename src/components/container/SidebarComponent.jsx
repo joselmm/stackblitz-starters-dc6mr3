@@ -150,13 +150,18 @@ const SidebarComponent = (props) => {
 
     if (itemIdx === 0) {
       const item = tempPlaylist[itemIdx];
-      for (let i = 0; i < tempPlaylist.length; i++) {
+      for (let i = 0; i < tempPlaylist.length - 1; i++) {
         tempPlaylist[i] = tempPlaylist[i + 1];
       }
-      tempPlaylist[0] = item;
+      tempPlaylist[tempPlaylist.length - 1] = item;
       props.setPlaylist(tempPlaylist);
       return;
     }
+
+    const previousItem = tempPlaylist[itemIdx - 1];
+    tempPlaylist[itemIdx - 1] = tempPlaylist[itemIdx];
+    tempPlaylist[itemIdx] = previousItem;
+    props.setPlaylist(tempPlaylist);
   }
 
   function moveItemDown(videoId) {
@@ -190,7 +195,11 @@ const SidebarComponent = (props) => {
           next={nextTrack}
           previous={prevTrack}
         />
-        <PlaylistComponent play={playSelectedTrack} />
+        <PlaylistComponent
+          play={playSelectedTrack}
+          moveDown={moveItemDown}
+          moveUp={moveItemUp}
+        />
       </div>
     </SideBarContext.Provider>
   );
