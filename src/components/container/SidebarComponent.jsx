@@ -178,7 +178,7 @@ const SidebarComponent = (props) => {
 
     if (itemIdx === tempPlaylist.length - 1) {
       const item = tempPlaylist[itemIdx];
-      for (let i = 1; i < tempPlaylist.length; i++) {
+      for (let i = itemIdx; i > 0; i--) {
         tempPlaylist[i] = tempPlaylist[i - 1];
       }
       tempPlaylist[0] = item;

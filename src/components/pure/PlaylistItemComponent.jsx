@@ -26,16 +26,14 @@ const PlaylistItemComponent = ({ itemInfo, play, moveDown, moveUp }) => {
   }
 
   return (
-    <div
-      onClick={
-        itemInfo.state === PLAYLIST_ITEM_STATE.READY
-          ? () => play(itemInfo.videoId)
-          : () => console.log('no listo')
-      }
-      className={'p-1 ' + classes}
-    >
+    <div className={'p-1 ' + classes}>
       <p
-        className="cursor-default"
+        onClick={
+          itemInfo.state === PLAYLIST_ITEM_STATE.READY
+            ? () => play(itemInfo.videoId)
+            : () => console.log('no listo')
+        }
+        className="cursor-pointer"
         title={itemInfo.title}
         style={{ whiteSpace: 'nowrap', overflow: 'hidden', margin: '0' }}
       >
