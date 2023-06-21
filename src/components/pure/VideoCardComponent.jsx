@@ -31,7 +31,7 @@ const VideoCardComponent = ({ info, toggleAddToPlaylist }) => {
               {addPlaylistElement()}
             </button>
           </div>
-          <small className="text-muted font-weight-bold p-1">
+          <small className="text-muted font-weight-bold p-1 ">
             {info.views}
           </small>
           <small className="text-muted font-weight-bold p-1">
