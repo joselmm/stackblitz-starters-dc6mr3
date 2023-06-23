@@ -5,13 +5,14 @@ import PlaylistItemComponent from '../pure/PlaylistItemComponent';
 
 const SideBarContext = React.createContext();
 
-const PlaylistComponent = ({ play, moveDown, moveUp }) => {
+const PlaylistComponent = ({ play, moveDown, moveUp, remove }) => {
   const state = useContext(SideBarContext);
 
   return (
     <div>
       {state.playlist.map((item, idx) => (
         <PlaylistItemComponent
+          remove={remove}
           moveDown={moveDown}
           moveUp={moveUp}
           play={play}
@@ -27,6 +28,14 @@ const SidebarComponent = (props) => {
   function playSelectedTrack(videoId) {
     //console.log('reproduciendo: ' + videoId);
     props.setCurrentPlayingId(videoId);
+  }
+
+  function removeSelectedTrack(videoId) {
+    const tempList = [...props.playlist];
+    const idx = tempList.findIndex((e) => e.videoId === videoId);
+    if (idx === -1) return;
+    tempList.splice(idx, 1);
+    props.setPlaylist(tempList);
   }
   function nextTrack() {
     if (props.setCurrentPlayingId === '') return;
@@ -202,6 +211,7 @@ const SidebarComponent = (props) => {
           previous={prevTrack}
         />
         <PlaylistComponent
+          remove={removeSelectedTrack}
           play={playSelectedTrack}
           moveDown={moveItemDown}
           moveUp={moveItemUp}

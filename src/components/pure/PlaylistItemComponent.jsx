@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import PlaylistItem from '../../models/PlaylistItem.class.js';
 import PLAYLIST_ITEM_STATE from '../../models/PlaylistItemState.enum.js';
 
-const PlaylistItemComponent = ({ itemInfo, play, moveDown, moveUp }) => {
+const PlaylistItemComponent = ({
+  itemInfo,
+  play,
+  moveDown,
+  moveUp,
+  remove,
+}) => {
   //depends on item state
   let classes = '';
   switch (itemInfo.state) {
@@ -46,6 +52,10 @@ const PlaylistItemComponent = ({ itemInfo, play, moveDown, moveUp }) => {
       <i
         onClick={() => moveDown(itemInfo.videoId)}
         className="bi bi-arrow-down cursor-pointer"
+      ></i>
+      <i
+        onClick={() => remove(itemInfo.videoId)}
+        className="bi bi-trash cursor-pointer"
       ></i>
     </div>
   );
