@@ -9,21 +9,15 @@ const SuggestionsComponent = ({
   //console.log(query);
   function renderSuggestions() {
     const elementArray = [];
-    suggestionList.forEach((s, idx) => {
-      var cut = s.slice(query.length);
+    suggestionList.forEach((sugg, idx) => {
+      //var cut = s.slice(query.length);
       var content =
         idx === suggestionSelectedIdx ? (
           <div className="bg-dark text-light">
-            <span>
-              {query}
-              {cut}
-            </span>
+            <span>{sugg}</span>
           </div>
         ) : (
-          <span>
-            <b>{query}</b>
-            {cut}
-          </span>
+          <span>{sugg}</span>
         );
       elementArray.push(
         <li
@@ -32,7 +26,7 @@ const SuggestionsComponent = ({
           className="list-group-item p-0 pl-1"
           onClick={() => {
             /* setSuggestionSelectedIdx(idx); */
-            inputSearchRef.current.value = s;
+            inputSearchRef.current.value = sugg;
             btnSearchRef.current.click();
           }}
         >
