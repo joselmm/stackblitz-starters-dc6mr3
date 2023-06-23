@@ -35,7 +35,15 @@ const SidebarComponent = (props) => {
     const idx = tempList.findIndex((e) => e.videoId === videoId);
     if (idx === -1) return;
     tempList.splice(idx, 1);
+    //update playlist
     props.setPlaylist(tempList);
+
+    // update videos array
+    const tempVideos = [...props.videos];
+    const videoCardIdx = tempVideos.findIndex((e) => e.videoId === videoId);
+    if (videoCardIdx === -1) return;
+    tempVideos[videoCardIdx].addedToPlayList = false;
+    props.setVideos(tempVideos);
   }
   function nextTrack() {
     if (props.setCurrentPlayingId === '') return;

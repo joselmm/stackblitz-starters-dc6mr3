@@ -51,9 +51,7 @@ export default function App() {
   const [shouldProcessQueue, setShouldProcessQueue] = useState(true);
   const [queue, setQueue] = useState([]);
   /* videos state */
-  const [videos, setVideos] = useState([
-    videoInfo1, videoInfo2
-  ]);
+  const [videos, setVideos] = useState([videoInfo1, videoInfo2]);
   /* playlist state */
 
   const [playlist, setPlaylist] = useState([
@@ -181,6 +179,8 @@ export default function App() {
         currentPlayingId={currentPlayingId}
         playlist={playlist}
         setPlaylist={setPlaylist}
+        videos={videos}
+        setVideos={setVideos}
       />
     </div>
   );

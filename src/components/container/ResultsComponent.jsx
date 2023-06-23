@@ -14,7 +14,7 @@ const ResultsComponent = ({
 }) => {
   /* add to playlist */
   function toggleAddToPlaylist(videoInfo) {
-    console.log(videoInfo);
+    //console.log(videoInfo);
     if (videoInfo.addedToPlayList === true) {
       console.log(videoInfo.addedToPlayList);
       removeFromPlaylist(videoInfo.videoId);
